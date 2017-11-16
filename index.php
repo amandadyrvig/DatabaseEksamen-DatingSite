@@ -12,13 +12,14 @@
 
     foreach ($datingProfils as $datingProfil){
       //fjerner profilen med givende id.
-      if ($datingProfil['email'] !== 'peterHansen@gmail.com'){
+      if ($datingProfil['email'] !== 'iceman@gmail.com'){
       ?>
+      <section class="datingProfiles">
         <h1><?php echo $datingProfil['name']; ?></h1>
-        <h2><?php echo $datingProfil['age']; ?></h2>
+        <h2>Age: <?php echo $datingProfil['age']; ?></h2>
         <p><?php echo $datingProfil['description']; ?></p>
         <img src="image/<?php echo $datingProfil['image'];?>" alt="image/<?php echo $datingProfil['image'];?>">
-        <p><?php echo $datingProfil['likes']; ?></p>
+        <h6>Likes: <?php echo $datingProfil['likes']; ?></h6>
 
         <form class="" action="process/updateLikes.php" method="post">
           <input type="hidden" name="profileId" value="<?php echo $datingProfil['email']; ?>">
@@ -29,21 +30,29 @@
         foreach ($comments as $comment) {
           if ($comment['userEmail'] === $datingProfil['email']){
           ?>
+          <section class="comment">
             <p><?php echo $comment['sender_userEmail']; ?></p>
             <p><?php echo $comment['messageText']; ?></p>
             <p><?php echo $comment['date']; ?></p>
+          </section>
           <?php
           }
         }
          ?>
-
+        <section class="commentFelt">
         <form class="" action="process/commentprocess.php" method="post">
-          <textarea type="text" name="messageText" placeholder="Comment"></textarea>
+          <textarea type="text" cols="40" name="messageText" placeholder="Comment"></textarea>
           <input type="hidden" name="profileId" value="<?php echo $datingProfil['email'];?>">
-          <button type="submit" name="button" value="insert">Send</button>
+          <button type="submit" name="button" value="insert">Comment</button>
         </form>
+      </section>
 
-      
+        <form class="" action="process/sendmessage.php" method="post">
+          <input type="hidden" name="id" value="<?php echo $datingProfil['email']; ?>">
+          <button type="submit" name="button" value="insert">Send a message</button>
+        </form>
+      </section>
+
       <?php
       }
     }

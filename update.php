@@ -4,13 +4,15 @@ include 'include/head.php';
 include 'include/database.php';
 include 'include/footer.php';
 
-$updateForms = $conn->query('SELECT * FROM user WHERE email = "peterHansen@gmail.com"')->fetchAll();
-$chooseSuperpowers = $conn->query('SELECT * FROM superpower')->fetchAll();
+$updateForms = $conn->query('SELECT * FROM user WHERE email = "iceman@gmail.com"')->fetchAll();
+
 ?>
 <main>
     <form class="" action="process/updateprocess.php" method="post">
       <?php foreach ($updateForms as $updateForm) {
         ?>
+        <section class="updateProfile">
+          <h1>Update Your Profile</h1>
             <!-- Name -->
             <label for="name">Name</label>
             <input type="text" name="name" value="<?php echo $updateForm['name'];?>">
@@ -24,17 +26,9 @@ $chooseSuperpowers = $conn->query('SELECT * FROM superpower')->fetchAll();
             <textarea type="text" name="description" rows="6" cols="80" value=""><?php echo $updateForm['description'];?></textarea>
 
             <button type="submit" name="button" value="insert">Save</button>
+        </section>
         <?php
       } ?>
 
-      <h2>Vælg kategorier</h2>
-        <?php
-        foreach ($chooseSuperpowers as $chooseSuperpower) {
-          ?>
-            <input type="checkbox" name="superpower[]" value="<?php echo $chooseSuperpower['name'];?>">
-            <label for=""><?php echo $chooseSuperpower['name'];?></label>
-          <?php
-        }
-        ?>
     </form>
   </main>

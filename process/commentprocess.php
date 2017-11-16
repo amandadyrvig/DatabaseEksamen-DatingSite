@@ -3,7 +3,7 @@
 include '../include/database.php';
 
 //variabler
-$sender = 'peterHansen@gmail.com';
+$sender = 'iceman@gmail.com';
 $messageText = $_POST['messageText'];
 $profileId = $_POST['profileId'];
 $senderUser = $sender;
