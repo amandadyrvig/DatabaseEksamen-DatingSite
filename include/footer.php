@@ -1,5 +1,5 @@
 
-<script src="js/gifts" type="text/javascript">
+<script src="js/message.js" type="text/javascript">
 
 </script>
 

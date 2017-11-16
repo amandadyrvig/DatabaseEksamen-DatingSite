@@ -5,6 +5,7 @@ include 'include/database.php';
 include 'include/footer.php';
 
 $updateForms = $conn->query('SELECT * FROM user WHERE email = "peterHansen@gmail.com"')->fetchAll();
+$chooseSuperpowers = $conn->query('SELECT * FROM superpower')->fetchAll();
 ?>
 <main>
     <form class="" action="process/updateprocess.php" method="post">
@@ -25,5 +26,15 @@ $updateForms = $conn->query('SELECT * FROM user WHERE email = "peterHansen@gmail
             <button type="submit" name="button" value="insert">Save</button>
         <?php
       } ?>
+
+      <h2>Vælg kategorier</h2>
+        <?php
+        foreach ($chooseSuperpowers as $chooseSuperpower) {
+          ?>
+            <input type="checkbox" name="superpower[]" value="<?php echo $chooseSuperpower['name'];?>">
+            <label for=""><?php echo $chooseSuperpower['name'];?></label>
+          <?php
+        }
+        ?>
     </form>
   </main>

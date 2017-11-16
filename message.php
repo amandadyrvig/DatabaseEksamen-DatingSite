@@ -7,7 +7,7 @@ $messages = $conn->query('SELECT * FROM message')->fetchAll();
 
 foreach ($messages as $message) {
   ?>
-    <p><?php echo $message['userEmail']; ?></p>
+    <p><?php echo $message['sender_userEmail']; ?></p>
     <p><?php echo $message['messageText']; ?></p>
     <p><?php echo $message['date']; ?></p>
   <?php

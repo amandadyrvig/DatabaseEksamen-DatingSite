@@ -38,11 +38,12 @@
          ?>
 
         <form class="" action="process/commentprocess.php" method="post">
-          <input type="hidden" name="senderUser">
-          <input type="text" name="comment" placeholder="Comment">
+          <textarea type="text" name="messageText" placeholder="Comment"></textarea>
           <input type="hidden" name="profileId" value="<?php echo $datingProfil['email'];?>">
           <button type="submit" name="button" value="insert">Send</button>
         </form>
+
+      
       <?php
       }
     }
