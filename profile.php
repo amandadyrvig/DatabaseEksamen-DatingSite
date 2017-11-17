@@ -4,9 +4,12 @@
     include 'include/database.php';
     include 'include/footer.php';
 
+    $profileId = 'iceman@gmail.com';
+    $profileLogin = $profileId;
+
     //visning af indholdet.
     //SELECT ONLY peters ID Email, because it is his profile we are on.
-    $userProfils = $conn->query('SELECT * FROM user WHERE email = "iceman@gmail.com"')->fetchAll();
+    $userProfils = $conn->query("SELECT * FROM user WHERE email = '$profileLogin'")->fetchAll();
 
     foreach ($userProfils as $userProfil){
       ?>

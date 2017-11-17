@@ -6,9 +6,13 @@
     include 'include/database.php';
     include 'include/footer.php';
 
+    $profileId = 'iceman@gmail.com';
+    $profileLogin = $profileId;
+
     //visning af indholdet.
     $datingProfils = $conn->query('SELECT * FROM user')->fetchAll();
-    $comments = $conn->query('SELECT * FROM comment')->fetchAll();
+    $comments = $conn->query('SELECT comment.userEmail, comment.sender_userEmail, comment.messageText, comment.date, user.name FROM comment JOIN user ON user.email = comment.sender_userEmail
+')->fetchAll();
 
     foreach ($datingProfils as $datingProfil){
       //fjerner profilen med givende id.
@@ -31,7 +35,7 @@
           if ($comment['userEmail'] === $datingProfil['email']){
           ?>
           <section class="comment">
-            <p><?php echo $comment['sender_userEmail']; ?></p>
+            <p><?php echo $comment['name']; ?></p>
             <p><?php echo $comment['messageText']; ?></p>
             <p><?php echo $comment['date']; ?></p>
           </section>

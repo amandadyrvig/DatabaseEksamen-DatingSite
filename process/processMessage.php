@@ -14,5 +14,5 @@ $userMessage->bindParam(3, $senderUser);
 
 $userMessage->execute();
 
-header("Location: ../index.php");
+header("Location: ../sentMessage.php");
 ?>

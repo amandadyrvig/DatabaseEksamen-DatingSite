@@ -21,13 +21,14 @@
   <h3>Choose a gift(s)</h3>
   <input type="hidden" name="profileId" value="<?php echo $profileId?>">
     <?php
-    foreach ($gifts as $gift) {
-      ?>
-      <input type="checkbox" name="gift[]" value="<?php echo $gift['title'];?>">
-      <label><?php echo $gift['title'];?></label>
-      <?php
-    }
-    ?>
+        foreach ($gifts as $gift) {
+          ?>
+            <input type="checkbox" name="sendGift[]" value="<?php echo $gift['title'];?>">
+            <label for=""><?php echo $gift['title'];?></label>
+          <?php
+        }
+        ?>
   <button type="submit" name="button" value="insert">Submit</button>
+  <a href="../index.php">Skip</a>
 
 </form>

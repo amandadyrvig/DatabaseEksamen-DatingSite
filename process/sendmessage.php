@@ -16,3 +16,4 @@ $id = $_POST['id'];
   <button type="submit" name="button" value="insert">Submit</button>
 </form>
 </section>
+<a href="../index.php">Skip</a>

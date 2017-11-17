@@ -6,16 +6,16 @@ $sender = 'iceman@gmail.com';
 
 $profileId = $_POST['profileId'];
 $senderUser = $sender;
-$gifts = $_POST['gift'];
+$giveGifts = $_POST['sendGift'];
 
-foreach ($gifts as $gift){
-  $sendGift = $conn->prepare("INSERT INTO userHasGift (giftId, userId, sender_userId) VALUES (?, ?, ?");
-  $sendGift->bindParam(1, $gift);
-  $sendGift->bindParam(2, $profileId);
-  $sendGift->bindParam(3, $senderUser);
+foreach ($giveGifts as $giveGift){
+  $gift = $conn->prepare("INSERT INTO userHasGift (giftId, userId, sender_userId) VALUES (?, ?, ?)");
+  $gift->bindParam(1, $giveGift);
+  $gift->bindParam(2, $profileId);
+  $gift->bindParam(3, $senderUser);
 
-  $sendGift->execute();
-
-  echo($gifts);
+  $gift->execute();
   }
+
+header("Location: ../sentGift.php");
 ?>
