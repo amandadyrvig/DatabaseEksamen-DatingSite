@@ -10,6 +10,6 @@
       <ul>
         <li><a href="index.php">Dating site</a></li>
         <li><a href="profile.php">Profile</a></li>
-        <li><a href="recievedMessage.php">Message</a></li>
+        <li><a href="recievedMessage.php">Messages</a></li>
       </ul>
     </nav>

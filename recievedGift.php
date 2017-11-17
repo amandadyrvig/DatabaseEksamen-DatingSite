@@ -6,13 +6,13 @@ include 'include/footer.php';
 include 'include/messageMenu.php';
 
 $recievedGift = $conn->query('SELECT * FROM gift')->fetchAll();
-$recievedGifts = $conn->query('SELECT user.name, gift.title, gift.giftImage, gift.description, userId FROM userHasGift JOIN user ON user.email = userHasGift.userId JOIN gift ON gift.title = userHasGift.giftID
+$recievedGifts = $conn->query('SELECT user.name, gift.title, gift.giftImage, gift.description, sender_userId FROM userHasGift JOIN user ON user.email = userHasGift.sender_userId JOIN gift ON gift.title = userHasGift.giftID
 ')->fetchAll();
 
 ?><h1>Recieved Gifts</h1><?php
 
 foreach ($recievedGifts as $recievedGift) {
-  if ($recievedGift['userId'] !== 'iceman@gmail.com'){
+  if ($recievedGift['sender_userId'] !== 'iceman@gmail.com'){
   ?>
   <section class="message">
     <h2>From: <?php echo $recievedGift['name']; ?></h2>
