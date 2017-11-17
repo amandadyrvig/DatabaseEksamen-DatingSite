@@ -15,6 +15,35 @@
 
 ?>
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    body {
+      text-align: center;
+      padding-top: 100px;
+    }
+    h3 {
+      padding-top: 30px;
+    }
+    section {
+      display: block;
+      padding: 20px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 30px;
+    }
+    a {
+      display: block;
+      padding: 10px;
+    }
+    </style>
+  </head>
+  <body>
+
 <h1>You gave a LIKE to <?php echo $profileId?>!</h1>
 <h2>send a gift too!</h2>
 <form class="" action="sendgift.php" method="post">
@@ -23,8 +52,10 @@
     <?php
         foreach ($gifts as $gift) {
           ?>
+          <section>
             <input type="checkbox" name="sendGift[]" value="<?php echo $gift['title'];?>">
             <label for=""><?php echo $gift['title'];?></label>
+          </section>
           <?php
         }
         ?>
@@ -32,3 +63,6 @@
   <a href="../index.php">Skip</a>
 
 </form>
+
+</body>
+</html>
