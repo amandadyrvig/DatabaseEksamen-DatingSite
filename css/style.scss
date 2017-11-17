@@ -1,4 +1,7 @@
 body {
+  h1 {
+    text-align: center;
+  }
   * {
     box-sizing: border-box;
   }
@@ -102,6 +105,10 @@ body {
     margin: 10px auto;
     border: 1px solid #cccccc;
     padding: 20px 40px;
+      img {
+        width: 100px;
+      }
+    }
 
   }
   .updateProfile {
@@ -116,7 +123,6 @@ body {
     h1 {
       margin-top: 60px;
     }
-  }
 }
 
 .sendMessage {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: localhost:3306
--- Genereringstid: 16. 11 2017 kl. 23:05:40
+-- Genereringstid: 17. 11 2017 kl. 11:20:25
 -- Serverversion: 5.6.35
 -- PHP-version: 7.1.8
 
@@ -45,7 +45,7 @@ INSERT INTO `comment` (`id`, `messageText`, `date`, `userEmail`, `sender_userEma
 
 CREATE TABLE `gift` (
   `title` varchar(60) NOT NULL,
-  `image` varchar(100) NOT NULL,
+  `giftImage` varchar(100) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -53,8 +53,11 @@ CREATE TABLE `gift` (
 -- Data dump for tabellen `gift`
 --
 
-INSERT INTO `gift` (`title`, `image`, `description`) VALUES
-('Flowers', 'flowers.jpg', 'A flower cannot blossom without sunshine, and it cant live without love. ');
+INSERT INTO `gift` (`title`, `giftImage`, `description`) VALUES
+('Balloons', 'balloons.jpg', 'You got some Love balloons, catch your love dream!.'),
+('Chocolate', 'chocolate.jpg', 'You got a chocolate box, maybe you schould share it? '),
+('Flowers', 'flowers.jpg', 'You got flowers! A flower cannot blossom without sunshine, and it cant live without love. '),
+('Teddy Bear', 'teddy.jpg', 'You got a Teddey bear! a teddy bear love hugs..');
 
 -- --------------------------------------------------------
 
@@ -99,10 +102,30 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `name`, `age`, `description`, `image`, `likes`) VALUES
-('hulk@gmail.com', 'Hulk', 30, 'he Hulk is typically seen as a hulking man with green skin, wearing only a pair of torn purple pants that survive his physical transformation.Originally, the Hulk was shown as simple minded and quick to anger.', 'hulk.jpg', 137),
+('hulk@gmail.com', 'Hulk', 30, 'Hulk is typically seen as a hulking man with green skin, wearing only a pair of torn purple pants that survive his physical transformation.Originally, the Hulk was shown as simple minded and quick to anger.', 'hulk.jpg', 137),
 ('iceman@gmail.com', 'iceman', 45, 'one of Iceman\'s best personality traits is that emotionally Bobby Drake is like the ice he manipulates -- not cold but transparent. \'He\'s devastatingly honest. He is very up-front with his emotions and his thoughts all the time.Also, he\'s obviously incredibly brave both in terms of facing external, physical danger as well as facing up to unpleasant situations and admitting his own mistakes.', 'iceman.jpg', 50),
-('jeangrey@gmail.com', 'Jean Grey', 22, 'Jean Grey is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. She was born with telepathic and telekinetic powers. Her powers first manifested when she saw her childhood friend being hit by a car. She is a caring, nurturing figure, but she also has to deal with being an Omega-level mutant and the physical manifestation of the cosmic Phoenix Force.', 'jeangrey.jpg', 90),
-('superwoman@hotmail.com', 'Superwoman', 20, 'Another orphan at the Midvale Orphanage who is one of Pre-Crisis Supergirl\'s/Linda Lee Danvers\'s best friends. Lena is unaware that she is the long lost younger sister of Lex Luthor. When Lena was still a small child and Lex was a teen, Lex turned evil after the laboratory accident he blamed on Superboy turned him bald. Lex\'s parents disowned him and told him to leave home. In order to prevent disgrace to Lena, they moved away from Smallville and told Lena that her brother had been killed in a mountain climbing accident. They changed their family name to Thorul, a rearrangement of the letters in Luthor. ', 'superwoman.jpg', 203);
+('jeangrey@gmail.com', 'Jean Grey', 22, 'Jean Grey is a member of a subspecies of humans known as mutants, who are born with superhuman abilities. She was born with telepathic and telekinetic powers. Her powers first manifested when she saw her childhood friend being hit by a car. She is a caring, nurturing figure, but she also has to deal with being an Omega-level mutant and the physical manifestation of the cosmic Phoenix Force.', 'jeangrey.jpg', 118),
+('superwoman@hotmail.com', 'Superwoman', 20, 'Another orphan at the Midvale Orphanage who is one of Pre-Crisis Supergirl\'s/Linda Lee Danvers\'s best friends. Lena is unaware that she is the long lost younger sister of Lex Luthor. When Lena was still a small child and Lex was a teen, Lex turned evil after the laboratory accident he blamed on Superboy turned him bald. Lex\'s parents disowned him and told him to leave home. In order to prevent disgrace to Lena, they moved away from Smallville and told Lena that her brother had been killed in a mountain climbing accident. They changed their family name to Thorul, a rearrangement of the letters in Luthor. ', 'superwoman.jpg', 220);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `userHasGift`
+--
+
+CREATE TABLE `userHasGift` (
+  `giftId` varchar(60) NOT NULL,
+  `userId` varchar(100) NOT NULL,
+  `sender_userId` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Data dump for tabellen `userHasGift`
+--
+
+INSERT INTO `userHasGift` (`giftId`, `userId`, `sender_userId`) VALUES
+('Flowers', 'superwoman@hotmail.com', 'iceman@gmail.com'),
+('Flowers', 'iceman@gmail.com', 'superwoman@hotmail.com');
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -137,6 +160,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indeks for tabel `userHasGift`
+--
+ALTER TABLE `userHasGift`
+  ADD KEY `giftId` (`giftId`),
+  ADD KEY `userhasgift_ibfk_2` (`userId`),
+  ADD KEY `sender_userId` (`sender_userId`);
+
+--
 -- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
@@ -144,7 +175,7 @@ ALTER TABLE `user`
 -- Tilføj AUTO_INCREMENT i tabel `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Tilføj AUTO_INCREMENT i tabel `message`
 --
@@ -167,3 +198,11 @@ ALTER TABLE `comment`
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`userEmail`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`sender_userEmail`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrænsninger for tabel `userHasGift`
+--
+ALTER TABLE `userHasGift`
+  ADD CONSTRAINT `userhasgift_ibfk_1` FOREIGN KEY (`giftId`) REFERENCES `gift` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userhasgift_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userhasgift_ibfk_3` FOREIGN KEY (`sender_userId`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
